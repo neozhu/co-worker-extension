@@ -1,4 +1,9 @@
-window.addEventListener("DOMContentLoaded", (event) => {});
+window.addEventListener("DOMContentLoaded", (event) => {
+   const user = localStorage.getItem("lastuser");
+   if(user!=null){
+       setuserdata(JSON.parse(user))
+   }
+});
 
 var searchbox = document.getElementById("searchbox");
 searchbox.onchange = function () {
@@ -44,7 +49,8 @@ function setuserdata(user) {
   profiledescription.innerHTML +=`<p>City: ${user.city}, ${user.country}</p>`
   globalid.innerHTML=user.globalIdNumber;
   costcenter.innerHTML=user.costCentre;
-  company.innerHTML=user.companyShortCut
+  company.innerHTML=user.companyShortCut;
+  localStorage.setItem("lastuser", JSON.stringify(user));
 }
 function setemptyuser(){
   profilename.innerHTML = `None,(blank)
