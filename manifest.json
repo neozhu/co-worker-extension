@@ -17,7 +17,7 @@
         "matches": [
           "<all_urls>"
         ],
-        "js": ["js/app.js"]
+        "js": ["js/clipboard.min.js"]
       }
     ],
     "web_accessible_resources": [

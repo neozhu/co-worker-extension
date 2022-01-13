@@ -4,19 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
+    <link 
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
-      rel="stylesheet"
+      rel="stylesheet" crossorigin="anonymous"
     />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
+      rel="stylesheet" crossorigin="anonymous"
     />
     <title>My co-worker</title>
     <style>
         body{
             font-family: HelveticaNeue-Light,Arial,sans-serif;
-            width: 320px;
+            width: 380px;
         }
       .has-search .form-control {
         margin-top: 8px;
@@ -294,7 +294,7 @@
       }
 
       .profile-card-4 {
-        max-width: 300px;
+        max-width: 360px;
         background-color: #fff;
         border-radius: 5px;
         box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
@@ -723,44 +723,45 @@
   <body>
     <div class="container">
       <div class="profile-card-4 text-center">
-        <img src="../images/title.jpg" class="img img-responsive" />
+        <img src="../images/title.jpg" class="img img-responsive" alt="background img"/>
 
         <div class="profile-content">
           <div class="form-group has-search">
-            <input type="text" class="form-control" placeholder="Search" id="searchbox" />
+            <input type="text" class="form-control" placeholder="input global id, email or short name" id="searchbox" />
           </div>
-          <div class="profile-name">
+          <div class="profile-name clipboard" title="click copy to clipboard" data-clipboard-target="p">
             Display Name(short name)
             <p>email address</p>
           </div>
           <div class="profile-description">
             <p>Phone: +91-123-456-7890</p>
             <p>Fax: +91-123-456-7890</p>
-            <p>Address: 123, ABC Street, XYZ City, ABC Country</p>
+            <p>City: XYZ City, ABC</p>
           </div>
           <div class="row">
-            <div class="col-xs-4">
+            <div class="col-xs-4 clipboard"  title="click copy to clipboard" data-clipboard-target="#globalid">
               <div class="profile-overview">
                 <p>Global ID</p>
-                <h4 id="globalid">99999</h4>
+                <h4 id="globalid" >999999</h4>
               </div>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-4 clipboard" title="click copy to clipboard" data-clipboard-target="#costcenter">
               <div class="profile-overview">
                 <p>Cost Center</p>
-                <h4 id="costcenter">00000</h4>
+                <h4 id="costcenter" >000000</h4>
               </div>
             </div>
             <div class="col-xs-4">
               <div class="profile-overview">
-                <p>Division</p>
-                <h4 id="division">DS</h4>
+                <p>Company</p>
+                <h4 id="company">VOITH</h4>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <script src="../js/clipboard.min.js"></script>
     <script src="popup.js"></script>
   </body>
 </html>

@@ -1,40 +1,70 @@
-window.addEventListener('DOMContentLoaded', (event) => {
-   
-});
+window.addEventListener("DOMContentLoaded", (event) => {});
 
 var searchbox = document.getElementById("searchbox");
-searchbox.onchange=function(){
-    var input = searchbox.value;
-    // if input is not empty
-    if(input.length > 0){
-        if(isEmail(input)){
-            console.log("Email address");
-            fetch('https://61dec78dfb8dae0017c2e274.mockapi.io/users').then(res=>{
-                console.log(res.json().then(data=>{
-                    setdata(data[0])
-                    console.log(data)
-                }))
-            })
+searchbox.onchange = function () {
+  const input = searchbox.value;
+  let url='';
+  // if input is not empty
+  if (input.length > 0) {
+    if (!isNaN(input)) {
+      url = `http://employeesearchservice.voith.net/api/v1/employees/by/globalId/${input.substring(
+        0,
+        6
+      )}`;
+    } else if (isEmail(input)) {
+      url = `http://employeesearchservice.voith.net/api/v1/employees/by/email/${input}`;
+    }else{
+      url = `http://employeesearchservice.voith.net/api/v1/employees/by/shortname/${input}`;
+    }
+    fetch(url).then((res) => {
+        if(res.status==200){
+          res.json().then((data) => {
+            setuserdata(data);
+          })
+        }else{
+            setemptyuser();
         }
-
-        searchbox.value='';
-    } 
-}
+  
+      });
+    searchbox.value = "";
+  }
+};
 var profilename = document.querySelector(".profile-name");
 var profiledescription = document.querySelector(".profile-description");
 var costcenter = document.getElementById("costcenter");
 var globalid = document.getElementById("globalid");
-var division = document.getElementById("division")
-function setdata(user) {
-profilename.innerHTML = ` zhu, hualin(zhuhua)
-    <p>huali.zhu@voith.com</p>`
+var company = document.getElementById("company");
+function setuserdata(user) {
+  profilename.innerHTML = `${user.firstname}, ${user.lastname}(${user.shortname})
+    <p>${user.logonname}</p>`;
+  profiledescription.innerHTML=``
+  user.communications.forEach(element => {
+    profiledescription.innerHTML +=`<p>${element.type}: ${element.value}</p>`
+  });
+  profiledescription.innerHTML +=`<p>City: ${user.city}, ${user.country}</p>`
+  globalid.innerHTML=user.globalIdNumber;
+  costcenter.innerHTML=user.costCentre;
+  company.innerHTML=user.companyShortCut
+}
+function setemptyuser(){
+  profilename.innerHTML = `None,(blank)
+    <p>blank</p>`;
+  profiledescription.innerHTML=`<p>Phone: +91-123-456-7890</p>
+  <p>Fax: +91-123-456-7890</p>
+  <p>City: XYZ City, ABC</p>`
+  globalid.innerHTML='999999';
+  costcenter.innerHTML='000000';
+  company.innerHTML='VOITH'
 }
 
 //create function to check is email address
 function isEmail(email) {
-    return String(email)
+  return String(email)
     .toLowerCase()
     .match(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 }
+
+
+new ClipboardJS('.clipboard');
