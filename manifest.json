@@ -1,7 +1,7 @@
 {
     "name": "My co-worker",
-    "version": "0.0.0.1",
-    "manifest_version": 2,
+    "version": "0.0.1.3",
+    "manifest_version": 3,
     "description": "My co-worker information",
     "icons": {
       "16": "icons/profile16x16.png",
@@ -9,7 +9,7 @@
       "48": "icons/profile48x48.png",
       "128": "icons/profile128x128.png"
     },
-    "browser_action": {
+    "action": {
       "default_popup": "popup/popup.html"
     },
     "content_scripts": [
@@ -20,7 +20,9 @@
         "js": ["js/clipboard.min.js"]
       }
     ],
-    "web_accessible_resources": [
-      "images/*.jpeg"
-    ]
+    "web_accessible_resources": [{
+      "resources": ["images/*.jpg","images/*.png","images/*.jpeg"],
+      "matches": [],
+      "extension_ids": []
+    }]
   }

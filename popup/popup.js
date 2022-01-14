@@ -57,7 +57,7 @@ function setemptyuser(){
     <p>blank</p>`;
   profiledescription.innerHTML=`<p>Phone: +91-123-456-7890</p>
   <p>Fax: +91-123-456-7890</p>
-  <p>City: XYZ City, ABC</p>`
+  <p>City: XYZ , ABC</p>`
   globalid.innerHTML='999999';
   costcenter.innerHTML='000000';
   company.innerHTML='VOITH'
