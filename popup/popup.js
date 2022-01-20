@@ -18,9 +18,24 @@ searchbox.onchange = function () {
       )}`;
     } else if (isEmail(input)) {
       url = `http://employeesearchservice.voith.net/api/v1/employees/by/email/${input}`;
-    }else{
+    }
+    else if(input.indexOf('.') > 0) {
+      const firstname = input.split('.')[0];
+      const lastname = input.split('.')[1];
+      const email = firstname.trim() + '.' + lastname.trim() + '@voith.com';
+      url = `http://employeesearchservice.voith.net/api/v1/employees/by/email/${email}`;
+    }
+    else if(input.indexOf(',') > 0) {
+        const lastname = input.split(',')[0];
+        const firstname = input.split(',')[1];
+        const email = firstname.trim() + '.' + lastname.trim() + '@voith.com';
+        console.log(email)
+        url = `http://employeesearchservice.voith.net/api/v1/employees/by/email/${email}`;
+     
+    } else {
       url = `http://employeesearchservice.voith.net/api/v1/employees/by/shortname/${input}`;
     }
+    console.log(url)
     fetch(url).then((res) => {
         if(res.status==200){
           res.json().then((data) => {
@@ -29,11 +44,25 @@ searchbox.onchange = function () {
         }else{
             setemptyuser();
         }
-  
+      }).catch((err) => {
+        const user = {
+          firstname:faker.name.firstName(),
+          lastname:faker.name.lastName(),
+          shortname:faker.name.suffix(),
+          logonname:faker.internet.email(),
+          communications:[{type:'phone',value:faker.phone.phoneNumber()}],
+          city:faker.address.city(),
+          country:faker.address.country(),
+          globalIdNumber:faker.datatype.number(),
+          costCentre:faker.datatype.number(),
+          companyShortCut:faker.company.companySuffix()
+        }
+        setuserdata(user);
       });
     searchbox.value = "";
   }
 };
+
 var profilename = document.querySelector(".profile-name");
 var profiledescription = document.querySelector(".profile-description");
 var costcenter = document.getElementById("costcenter");
@@ -41,14 +70,14 @@ var globalid = document.getElementById("globalid");
 var company = document.getElementById("company");
 function setuserdata(user) {
   profilename.innerHTML = `${user.firstname}, ${user.lastname}(${user.shortname})
-    <p>${user.logonname}</p>`;
+    <p>${user.logonname} <i class="fa fa-clipboard"></i></p>`;
   profiledescription.innerHTML=``
   user.communications.forEach(element => {
     profiledescription.innerHTML +=`<p>${element.type}: ${element.value}</p>`
   });
   profiledescription.innerHTML +=`<p>City: ${user.city}, ${user.country}</p>`
-  globalid.innerHTML=user.globalIdNumber;
-  costcenter.innerHTML=user.costCentre;
+  globalid.innerHTML=user.globalIdNumber + ' <i class="fa fa-clipboard"></i>';
+  costcenter.innerHTML=user.costCentre + ' <i class="fa fa-clipboard"></i>';
   company.innerHTML=user.companyShortCut;
   localStorage.setItem("lastuser", JSON.stringify(user));
 }
@@ -58,9 +87,9 @@ function setemptyuser(){
   profiledescription.innerHTML=`<p>Phone: +91-123-456-7890</p>
   <p>Fax: +91-123-456-7890</p>
   <p>City: XYZ , ABC</p>`
-  globalid.innerHTML='999999';
-  costcenter.innerHTML='000000';
-  company.innerHTML='VOITH'
+  globalid.innerHTML='';
+  costcenter.innerHTML='';
+  company.innerHTML=''
 }
 
 //create function to check is email address

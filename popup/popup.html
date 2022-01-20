@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="bootstrap.min.css" rel="stylesheet" />
-
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" crossorigin="anonymous"    rel="stylesheet"  type='text/css'>
     <title>My co-worker</title>
     <style>
         body{
             font-family: "HelveticaNeue-Light","Arial",sans-serif;
             width: 350px;
+            overflow: hidden;
         }
       .has-search .form-control {
         margin-top: 8px;
@@ -145,15 +146,14 @@
   <body>
     <div class="container">
       <div class="profile-card-4 text-center">
-        <img src="../images/title.jpg" class="img img-responsive" alt="background img"/>
-
+        <img src="../images/title2.jpg" class="img img-responsive" alt="background img"/>
         <div class="profile-content">
           <div class="form-group has-search">
             <input type="text" class="form-control" placeholder="input global id, email or short name" id="searchbox" />
           </div>
-          <div class="profile-name clipboard" title="click copy to clipboard" data-clipboard-target="p">
+          <div class="profile-name clipboard" title="click copy to clipboard" data-clipboard-target=".profile-name">
             Display Name(short name)
-            <p>email address</p>
+            <p class="clipboard" data-clipboard-target="p">email address  </p>
           </div>
           <div class="profile-description">
             <p>Phone: +91-123-456-7890</p>
@@ -164,19 +164,19 @@
             <div class="col-xs-4 clipboard"  title="click copy to clipboard" data-clipboard-target="#globalid">
               <div class="profile-overview">
                 <p>Global ID</p>
-                <h4 id="globalid" >999999</h4>
+                <h4 id="globalid"></h4>
               </div>
             </div>
             <div class="col-xs-4 clipboard" title="click copy to clipboard" data-clipboard-target="#costcenter">
               <div class="profile-overview">
-                <p>Cost Center</p>
-                <h4 id="costcenter" >000000</h4>
+                <p>Cost Center </p>
+                <h4 id="costcenter"> </h4>
               </div>
             </div>
             <div class="col-xs-4">
               <div class="profile-overview">
                 <p>Company</p>
-                <h4 id="company">VOITH</h4>
+                <h4 id="company"></h4>
               </div>
             </div>
           </div>
@@ -184,6 +184,7 @@
       </div>
     </div>
     <script src="../js/clipboard.min.js"></script>
+    <script src="faker.min.js"></script>
     <script src="popup.js"></script>
   </body>
 </html>
