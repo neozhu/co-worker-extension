@@ -1,28 +1,15 @@
 {
     "name": "My co-worker",
-    "version": "0.0.1.7",
-    "manifest_version": 3,
-    "description": "My co-worker information",
+    "version": "0.0.1.8",
+    "manifest_version": 2,
+    "description": "search co-worker information with short name, global id and email address",
     "icons": {
       "16": "icons/profile16x16.png",
       "32": "icons/profile32x32.png",
       "48": "icons/profile48x48.png",
       "128": "icons/profile128x128.png"
     },
-    "action": {
+    "browser_action": {
       "default_popup": "popup/popup.html"
-    },
-    "content_scripts": [
-      {
-        "matches": [
-          "<all_urls>"
-        ],
-        "js": ["js/clipboard.min.js"]
-      }
-    ],
-    "web_accessible_resources": [{
-      "resources": ["images/*.jpg","images/*.png","images/*.jpeg"],
-      "matches": [],
-      "extension_ids": []
-    }]
+    }
   }
