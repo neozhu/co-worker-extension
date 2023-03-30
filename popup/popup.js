@@ -12,28 +12,28 @@ searchbox.onchange = function () {
   // if input is not empty
   if (input.length > 0) {
     if (!isNaN(input)) {
-      url = `http://employeesearchservice.voith.net/api/v1/employees/by/globalId/${input.substring(
+      url = `https://employeesearchservice.voith.net/api/v1/employees/by/globalId/${input.substring(
         0,
         6
       )}`;
     } else if (isEmail(input)) {
-      url = `http://employeesearchservice.voith.net/api/v1/employees/by/email/${input}`;
+      url = `https://employeesearchservice.voith.net/api/v1/employees/by/email/${input}`;
     }
     else if(input.indexOf('.') > 0) {
       const firstname = input.split('.')[0];
       const lastname = input.split('.')[1];
       const email = firstname.trim() + '.' + lastname.trim() + '@voith.com';
-      url = `http://employeesearchservice.voith.net/api/v1/employees/by/email/${email}`;
+      url = `https://employeesearchservice.voith.net/api/v1/employees/by/email/${email}`;
     }
     else if(input.indexOf(',') > 0) {
         const lastname = input.split(',')[0];
         const firstname = input.split(',')[1];
         const email = firstname.trim() + '.' + lastname.trim() + '@voith.com';
         console.log(email)
-        url = `http://employeesearchservice.voith.net/api/v1/employees/by/email/${email}`;
+        url = `https://employeesearchservice.voith.net/api/v1/employees/by/email/${email}`;
      
     } else {
-      url = `http://employeesearchservice.voith.net/api/v1/employees/by/shortname/${input}`;
+      url = `https://employeesearchservice.voith.net/api/v1/employees/by/shortname/${input}`;
     }
     console.log(url)
     fetch(url).then((res) => {
