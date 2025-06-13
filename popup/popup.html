@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" crossorigin="anonymous"    rel="stylesheet"  type='text/css'>
+    <link href="font-awesome.css" rel="stylesheet" type="text/css" />
     <title>My co-worker</title>
     <style>
-        body{
-            font-family: "HelveticaNeue-Light","Arial",sans-serif;
-            width: 350px;
-            overflow: hidden;
-        }
+      body {
+        font-family: "HelveticaNeue-Light", "Arial", sans-serif;
+        width: 350px;
+        overflow: hidden;
+      }
       .has-search .form-control {
         margin-top: 8px;
       }
@@ -38,7 +38,7 @@
       input,
       p,
       a {
-        font-family: "HelveticaNeue-Light","Arial",sans-serif;
+        font-family: "HelveticaNeue-Light", "Arial", sans-serif;
         margin: 0px;
       }
 
@@ -64,8 +64,6 @@
         perspective: 1000;
       }
 
-     
-
       .profile-card-4 {
         max-width: 330px;
         background-color: #fff;
@@ -75,10 +73,34 @@
         position: relative;
         margin: 10px auto;
         cursor: pointer;
-      }
-
-      .profile-card-4 img {
-        transition: all 0.25s linear;
+      }     
+       .profile-card-4 img {
+        transition: transform 0.3s ease-out;
+        transform-origin: center;
+        animation: image-entry 1.2s ease-out forwards;
+        will-change: transform;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        max-height: 180px; /* 控制最大高度 */
+        position: relative;
+        z-index: 1;
+        transform: rotate(0deg) scale(1);
+      }@keyframes image-entry {
+        0% {
+          opacity: 0;
+          transform: rotate(0deg) scale(1.1);
+          filter: blur(5px) brightness(90%);
+        }
+        60% {
+          opacity: 0.8;
+          filter: blur(1px) brightness(95%);
+        }
+        100% {
+          opacity: 1;
+          transform: rotate(1deg) scale(1);
+          filter: blur(0) brightness(100%);
+        }
       }
 
       .profile-card-4 .profile-content {
@@ -122,7 +144,6 @@
         font-weight: bold;
         font-size: 14px;
       }
-
       .profile-card-4 .profile-content::before {
         content: "";
         position: absolute;
@@ -133,27 +154,72 @@
         background-color: #fff;
         z-index: 0;
         transform: skewY(3deg);
+      }      /* 悬停时的图片容器效果 */
+      .profile-card-4 {
+        transition: all 0.4s ease;
       }
-
-      .profile-card-4:hover img {
-        transform: rotate(5deg) scale(1.1, 1.1);
-        filter: brightness(110%);
-      }
-
       
+       /* 平滑的渐显+模糊到清晰动画效果 */
+      @keyframes smooth-reveal {
+        0% {
+          opacity: 0;
+          transform: translateY(1px);
+          filter: blur(8px);
+        }
+        50% {
+          opacity: 0.7;
+          transform: translateY(0.5px);
+          filter: blur(3px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+
+      /* 为内容添加预设样式，防止闪烁 */
+      .profile-name,
+      .profile-description,
+      #globalid,
+      #costcenter,
+      #company {
+        opacity: 0;
+        filter: blur(8px);
+        will-change: opacity, transform, filter;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+
+      .blur-animation {
+        animation: smooth-reveal 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="profile-card-4 text-center">
-        <img src="../images/title2.jpg" class="img img-responsive" alt="background img"/>
+        <img
+          src="../images/title3.jpg"
+          class="img img-responsive"
+          alt="background img"
+        />
         <div class="profile-content">
           <div class="form-group has-search">
-            <input type="text" class="form-control" placeholder="input global id, email or short name" id="searchbox" />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="input global id, email or short name"
+              id="searchbox"
+            />
           </div>
-          <div class="profile-name clipboard" title="click copy to clipboard" data-clipboard-target=".profile-name">
-            Display Name(short name)
-            <p class="clipboard" data-clipboard-target="p">email address  </p>
+          <div
+            class="profile-name clipboard"
+            title="click copy to clipboard"
+            data-clipboard-target=".profile-name"
+          >
+            Display Name (short name)
+            <p class="clipboard" data-clipboard-target="p">email address</p>
           </div>
           <div class="profile-description">
             <p>Phone: +91-123-456-7890</p>
@@ -161,16 +227,24 @@
             <p>City: XYZ City, ABC</p>
           </div>
           <div class="row">
-            <div class="col-xs-4 clipboard"  title="click copy to clipboard" data-clipboard-target="#globalid">
+            <div
+              class="col-xs-4 clipboard"
+              title="click copy to clipboard"
+              data-clipboard-target="#globalid"
+            >
               <div class="profile-overview">
                 <p>Global ID</p>
                 <h4 id="globalid"></h4>
               </div>
             </div>
-            <div class="col-xs-4 clipboard" title="click copy to clipboard" data-clipboard-target="#costcenter">
+            <div
+              class="col-xs-4 clipboard"
+              title="click copy to clipboard"
+              data-clipboard-target="#costcenter"
+            >
               <div class="profile-overview">
-                <p>Cost Center </p>
-                <h4 id="costcenter"> </h4>
+                <p>Cost Center</p>
+                <h4 id="costcenter"></h4>
               </div>
             </div>
             <div class="col-xs-4">
