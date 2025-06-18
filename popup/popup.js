@@ -39,9 +39,26 @@ window.addEventListener("DOMContentLoaded", (event) => {
 });
 
 var searchbox = document.getElementById("searchbox");
-searchbox.onchange = function () {
-  const input = searchbox.value;
-  
+
+// 添加键盘事件监听器，防止回车键关闭popup
+searchbox.addEventListener("keydown", function(event) {
+  if (event.key === "Enter" || event.keyCode === 13) {
+    // 阻止默认行为（表单提交等）
+    event.preventDefault();
+    event.stopPropagation();
+    
+    // 手动触发搜索
+    const input = searchbox.value.trim();
+    if (input.length > 0) {
+      performSearch(input);
+      searchbox.value = "";
+    }
+    return false;
+  }
+});
+
+// 提取搜索逻辑到独立函数
+function performSearch(input) {
   // 使用全局变量backgroundImg，因为已经在DOMContentLoaded中定义了
   if (backgroundImg) {
     // 添加一个微妙的脉冲效果，暗示搜索正在进行
@@ -107,8 +124,13 @@ searchbox.onchange = function () {
         }
         setuserdata(user);
       });
-    searchbox.value = "";
   }
+}
+
+searchbox.onchange = function () {
+  const input = searchbox.value;
+  performSearch(input);
+  searchbox.value = "";
 };
 
 var profilename = document.querySelector(".profile-name");
