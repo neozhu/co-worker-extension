@@ -120,7 +120,7 @@
       .profile-card-4 .profile-name p {
         font-weight: 600;
         font-size: 13px;
-        letter-spacing: 1.5px;
+     
       }
 
       .profile-card-4 .profile-description {
@@ -194,6 +194,46 @@
       .blur-animation {
         animation: smooth-reveal 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
       }
+      
+      /* 复制图标样式 */
+      .copy-icon {
+        display: inline-block;
+        margin-left: 5px;
+        cursor: pointer;
+        color: #777;
+        transition: color 0.2s ease;
+      }
+      
+      .copy-icon:hover {
+        color: #273751;
+      }
+      
+      .copy-icon:active {
+        color: #1e7e34;
+        transform: scale(0.85);
+        transition: transform 0.1s, color 0.1s;
+      }
+      
+      .copy-success {
+        animation: copy-feedback 1s ease;
+      }
+      
+      @keyframes copy-feedback {
+        0% { color: #273751; }
+        50% { color: #28a745; transform: scale(1.2); }
+        100% { color: #273751; transform: scale(1); }
+      }
+      
+      .display-name-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .copy-icon i {
+        font-size: 14px;
+        vertical-align: middle;
+      }
     </style>
   </head>
   <body>
@@ -213,13 +253,20 @@
               id="searchbox"
             />
           </div>
-          <div
-            class="profile-name clipboard"
-            title="click copy to clipboard"
-            data-clipboard-target=".profile-name"
-          >
-            Display Name (short name)
-            <p class="clipboard" data-clipboard-target="p">email address</p>
+          <div class="profile-name">
+            <span class="display-name-container">
+              <span id="display-name-text" style="margin-right:2px">Display Name</span>
+              (<span id="shortname-text">short name</span>
+              <span class="clipboard copy-icon" title="Copy short name" data-clipboard-target="#shortname-text">
+                <i class="fa fa-clipboard"></i>
+              </span>)
+            </span>
+            <p>
+              <span id="email-text">email address</span>
+              <span class="clipboard copy-icon" title="Copy email address" data-clipboard-target="#email-text">
+                <i class="fa fa-clipboard"></i>
+              </span>
+            </p>
           </div>
           <div class="profile-description">
             <p>Phone: +91-123-456-7890</p>

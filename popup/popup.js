@@ -161,8 +161,20 @@ function setuserdata(user) {
   // 等待DOM刷新
   requestAnimationFrame(() => {
     // 设置内容
-    profilename.innerHTML = `${user.firstname}, ${user.lastname} (${user.shortname})
-      <p>${user.logonname} <i class="fa fa-clipboard"></i></p>`;
+    profilename.innerHTML = `
+      <span class="display-name-container">
+        <span id="display-name-text" style="margin-right:5px">${user.firstname}, ${user.lastname}</span>
+         (<span id="shortname-text">${user.shortname}</span>
+         <span class="clipboard copy-icon" title="Copy short name" data-clipboard-target="#shortname-text">
+          <i class="fa fa-clipboard"></i>
+         </span>)
+      </span>
+      <p>
+        <span id="email-text">${user.logonname}</span>
+        <span class="clipboard copy-icon" title="Copy email address" data-clipboard-target="#email-text">
+          <i class="fa fa-clipboard"></i>
+        </span>
+      </p>`;
     profiledescription.innerHTML=``
     user.communications.forEach(element => {
       profiledescription.innerHTML +=`<p>${element.type}: ${element.value}</p>`
@@ -190,6 +202,26 @@ function setuserdata(user) {
       setTimeout(() => globalid.classList.add("blur-animation"), 220);
       setTimeout(() => costcenter.classList.add("blur-animation"), 250);
       setTimeout(() => company.classList.add("blur-animation"), 280);
+      
+      // 重新初始化剪贴板功能，确保新元素上的复制功能正常工作
+      setTimeout(() => {
+        // 销毁旧的剪贴板实例
+        if (clipboard) {
+          clipboard.destroy();
+        }
+        // 创建新的剪贴板实例
+        clipboard = new ClipboardJS('.clipboard');
+        clipboard.on('success', function(e) {
+          // 只为 profile-name 区域的复制按钮添加动画
+          if (e.trigger.closest('.profile-name')) {
+            e.trigger.classList.add('copy-success');
+            setTimeout(() => {
+              e.trigger.classList.remove('copy-success');
+            }, 1000);
+          }
+          e.clearSelection();
+        });
+      }, 300);
     });
   });
   
@@ -218,8 +250,20 @@ function setemptyuser(){
   // 等待DOM刷新
   requestAnimationFrame(() => {
     // 设置内容
-    profilename.innerHTML = `None,(blank)
-      <p>blank</p>`;
+    profilename.innerHTML = `
+      <span class="display-name-container">
+        <span id="display-name-text">None, blank</span>
+        (<span id="shortname-text">None</span>
+        <span class="clipboard copy-icon" title="Copy short name" data-clipboard-target="#shortname-text">
+          <i class="fa fa-clipboard"></i>
+        </span>)
+      </span>
+      <p>
+        <span id="email-text">blank</span>
+        <span class="clipboard copy-icon" title="Copy email address" data-clipboard-target="#email-text">
+          <i class="fa fa-clipboard"></i>
+        </span>
+      </p>`;
     profiledescription.innerHTML=`<p>Phone: +91-123-456-7890</p>
     <p>Fax: +91-123-456-7890</p>
     <p>City: XYZ , ABC</p>`
@@ -256,4 +300,15 @@ function isEmail(email) {
 }
 
 
-new ClipboardJS('.clipboard');
+// 初始化剪贴板
+let clipboard = new ClipboardJS('.clipboard');
+
+// 添加成功事件处理
+clipboard.on('success', function(e) {
+  // 添加一个小动画或反馈效果
+  e.trigger.classList.add('copy-success');
+  setTimeout(() => {
+    e.trigger.classList.remove('copy-success');
+  }, 1000);
+  e.clearSelection();
+});
