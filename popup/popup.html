@@ -4,307 +4,384 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="bootstrap.min.css" rel="stylesheet" />
-    <link href="font-awesome.css" rel="stylesheet" type="text/css" />
     <title>My co-worker</title>
     <style>
+      /* Reset and base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
       body {
-        font-family: "HelveticaNeue-Light", "Arial", sans-serif;
         width: 350px;
         overflow: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        background-color: #f9fafb;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #374151;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
-      .has-search .form-control {
-        margin-top: 8px;
-      }
-
-      .has-search .form-control-feedback {
-        position: absolute;
-        z-index: 2;
-        display: block;
-        width: 2.375rem;
-        height: 2.375rem;
-        line-height: 2.375rem;
-        text-align: center;
-        pointer-events: none;
-        color: #aaa;
-      }
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      div,
-      input,
-      p,
-      a {
-        font-family: "HelveticaNeue-Light", "Arial", sans-serif;
-        margin: 0px;
-      }
-
-      a,
-      a:hover,
-      a:focus {
-        color: inherit;
-      }
-
-      body {
-        background-color: #f1f2f3;
-      }
-
-      .container-fluid,
-      .container {
-        max-width: 1200px;
-        margin-bottom: 5px;
-      }
-
-      .card-container {
-        padding: 100px 0px;
-        -webkit-perspective: 1000;
-        perspective: 1000;
-      }
-
-      .profile-card-4 {
-        max-width: 330px;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
-        overflow: hidden;
-        position: relative;
-        margin: 10px auto;
-        cursor: pointer;
-      }     
-       .profile-card-4 img {
-        transition: transform 0.3s ease-out;
-        transform-origin: center;
-        animation: image-entry 1.2s ease-out forwards;
-        will-change: transform;
+      
+      /* Layout utilities */
+      .max-w-sm { max-width: 24rem; }
+      .mx-auto { margin-left: auto; margin-right: auto; }
+      .bg-white { background-color: #ffffff; }
+      .bg-gray-50 { background-color: #f9fafb; }
+      .bg-blue-50 { background-color: #eff6ff; }
+      .bg-green-50 { background-color: #f0fdf4; }
+      .bg-purple-50 { background-color: #faf5ff; }
+      .rounded-lg { border-radius: 0.5rem; }
+      .rounded-md { border-radius: 0.375rem; }
+      .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+      .overflow-hidden { overflow: hidden; }
+      
+      /* Spacing */
+      .p-2 { padding: 0.5rem; }
+      .p-3 { padding: 0.75rem; }
+      .p-4 { padding: 1rem; }
+      .mb-1 { margin-bottom: 0.25rem; }
+      .mb-3 { margin-bottom: 0.75rem; }
+      .mb-4 { margin-bottom: 1rem; }
+      .ml-1 { margin-left: 0.25rem; }
+      .mx-1 { margin-left: 0.25rem; margin-right: 0.25rem; }
+      .space-y-1 > * + * { margin-top: 0.25rem; }
+      .space-y-4 > * + * { margin-top: 1rem; }
+      .gap-1 { gap: 0.25rem; }
+      .gap-3 { gap: 0.75rem; }
+      
+      /* Sizing */
+      .w-full { width: 100%; }
+      .flex-1 { flex: 1 1 0%; }
+      .header-image { 
+        height: 140px; 
+        object-fit: cover; 
         width: 100%;
-        height: auto;
-        object-fit: cover;
-        max-height: 180px; /* 控制最大高度 */
         position: relative;
-        z-index: 1;
-        transform: rotate(0deg) scale(1);
-      }@keyframes image-entry {
-        0% {
-          opacity: 0;
-          transform: rotate(0deg) scale(1.1);
-          filter: blur(5px) brightness(90%);
-        }
-        60% {
-          opacity: 0.8;
-          filter: blur(1px) brightness(95%);
-        }
-        100% {
-          opacity: 1;
-          transform: rotate(1deg) scale(1);
-          filter: blur(0) brightness(100%);
-        }
       }
-
-      .profile-card-4 .profile-content {
+      
+      /* Header image container with skew effect */
+      .header-container {
         position: relative;
-        padding: 15px;
-        background-color: #fff;
+        overflow: hidden;
+        height: 140px;
       }
-
-      .profile-card-4 .profile-name {
-        font-weight: bold;
-        left: 0px;
-        right: 0px;
-        top: -70px;
-        font-size: 17px;
-      }
-
-      .profile-card-4 .profile-name p {
-        font-weight: 600;
-        font-size: 13px;
-     
-      }
-
-      .profile-card-4 .profile-description {
-        color: #777;
-        font-size: 12px;
-        padding: 10px;
-      }
-
-      .profile-card-4 .profile-overview {
-        padding: 15px 0px;
-      }
-
-      .profile-card-4 .profile-overview p {
-        font-size: 10px;
-        font-weight: 600;
-        color: #777;
-      }
-
-      .profile-card-4 .profile-overview h4 {
-        color: #273751;
-        font-weight: bold;
-        font-size: 14px;
-      }
-      .profile-card-4 .profile-content::before {
-        content: "";
+      
+      .header-container::after {
+        content: '';
         position: absolute;
-        height: 20px;
-        top: -10px;
-        left: 0px;
-        right: 0px;
-        background-color: #fff;
-        z-index: 0;
-        transform: skewY(3deg);
-      }      /* 悬停时的图片容器效果 */
-      .profile-card-4 {
-        transition: all 0.4s ease;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 15px;
+        background: #ffffff;
+        transform: skewY(1.5deg);
+        transform-origin: bottom left;
+        z-index: 1;
       }
       
-       /* 平滑的渐显+模糊到清晰动画效果 */
-      @keyframes smooth-reveal {
-        0% {
-          opacity: 0;
-          transform: translateY(1px);
-          filter: blur(8px);
-        }
-        50% {
-          opacity: 0.7;
-          transform: translateY(0.5px);
-          filter: blur(3px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-          filter: blur(0);
-        }
+      /* Flexbox */
+      .flex { display: flex; }
+      .items-center { align-items: center; }
+      .justify-center { justify-content: center; }
+      
+      /* Grid */
+      .grid { display: grid; }
+      .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      
+      /* Text */
+      .text-center { text-align: center; }
+      .text-xs { 
+        font-size: 0.75rem; 
+        line-height: 1rem; 
+        font-weight: 500;
+        letter-spacing: 0.025em;
       }
-
-      /* 为内容添加预设样式，防止闪烁 */
-      .profile-name,
-      .profile-description,
-      #globalid,
-      #costcenter,
-      #company {
-        opacity: 0;
-        filter: blur(8px);
-        will-change: opacity, transform, filter;
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
+      .text-sm { 
+        font-size: 0.875rem; 
+        line-height: 1.25rem; 
+        font-weight: 400;
       }
-
-      .blur-animation {
-        animation: smooth-reveal 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+      .text-lg { 
+        font-size: 1.125rem; 
+        line-height: 1.75rem; 
+        font-weight: 600;
+        letter-spacing: -0.025em;
+      }
+      .text-md {
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-weight: 500;
+      }
+      .font-medium { font-weight: 500; }
+      .font-semibold { font-weight: 700; }
+      .font-bold { font-weight: 700; }
+      .block { display: block; }
+      
+      /* Colors */
+      .text-gray-500 { color: #6b7280; }
+      .text-gray-600 { color: #4b5563; }
+      .text-gray-700 { color: #374151; }
+      .text-gray-800 { color: #1f2937; }
+      
+      /* Form elements */
+      input[type="text"] {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-weight: 400;
+        background-color: #ffffff;
+        transition: all 0.2s ease;
+        font-family: inherit;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
       
-      /* 复制图标样式 */
-      .copy-icon {
-        display: inline-block;
-        margin-left: 5px;
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+      
+      input[type="text"]::placeholder {
+        color: #9ca3af;
+        font-weight: 400;
+      }
+      
+      /* Search loading state */
+      .search-loading {
+        position: relative;
+        pointer-events: none;
+        opacity: 0.7;
+      }
+      
+      .search-loading::after {
+        content: '';
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        border: 2px solid #e5e7eb;
+        border-top: 2px solid #3b82f6;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: translateY(-50%) rotate(0deg); }
+        100% { transform: translateY(-50%) rotate(360deg); }
+      }
+      
+      /* Button styles */
+      button {
+        background: none;
+        border: none;
+        font-size: inherit;
+        font-family: inherit;
+        font-weight: 500;
+      }
+      
+      .cursor-pointer { cursor: pointer; }
+      
+      /* Copy button styles */
+      .copy-btn {
         cursor: pointer;
-        color: #777;
-        transition: color 0.2s ease;
+        transition: all 0.2s ease;
+        border-radius: 6px;
+        position: relative;
       }
       
-      .copy-icon:hover {
-        color: #273751;
+      .copy-btn:hover {
+        background-color: rgba(59, 130, 246, 0.05);
+        transform: translateY(-1px);
       }
       
-      .copy-icon:active {
-        color: #1e7e34;
-        transform: scale(0.85);
-        transition: transform 0.1s, color 0.1s;
+      /* Override hover background for name-card */
+      .name-card.copy-btn:hover {
+        background-color: transparent;
       }
       
       .copy-success {
-        animation: copy-feedback 1s ease;
+        background-color: rgba(16, 185, 129, 0.1) !important;
       }
       
-      @keyframes copy-feedback {
-        0% { color: #273751; }
-        50% { color: #28a745; transform: scale(1.2); }
-        100% { color: #273751; transform: scale(1); }
-      }
-      
-      .display-name-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      .copy-icon i {
+      /* Copy success indicator */
+      .copy-success-indicator {
+        position: absolute;
+        top: 8px;
+        right: 8px;
         font-size: 14px;
-        vertical-align: middle;
+        color: #10b981;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 2px 6px;
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        z-index: 10;
+      }
+      
+      /* Info card styles */
+      .info-card {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+      }
+      
+      .info-card:hover {
+        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        border-color: #cbd5e1;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+      
+      .info-card .copy-indicator {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        font-size: 10px;
+        color: #94a3b8;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2px 6px;
+        border-radius: 3px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        pointer-events: none;
+      }
+      
+      .info-card:hover .copy-indicator {
+        opacity: 1;
+      }
+      
+      /* Flex column utilities */
+      .flex-col { flex-direction: column; }
+      
+      /* Name card - special style without border/background */
+      .name-card {
+        position: relative;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+        padding: 12px;
+        border-radius: 8px;
+      }
+      
+      .name-card:hover {
+        transform: translateY(-1px);
+      }
+      
+      .name-card .copy-indicator {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        font-size: 10px;
+        color: #94a3b8;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2px 6px;
+        border-radius: 3px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        pointer-events: none;
+      }
+      
+      .name-card:hover .copy-indicator {
+        opacity: 1;
       }
     </style>
   </head>
-  <body>
-    <div class="container">
-      <div class="profile-card-4 text-center">
+  <body class="bg-gray-50">
+    <div class="max-w-sm mx-auto bg-white shadow-lg overflow-hidden">
+      <!-- Header Image -->
+      <div class="header-container">
         <img
           src="../images/title3.jpg"
-          class="img img-responsive"
+          class="header-image"
           alt="background img"
         />
-        <div class="profile-content">
-          <div class="form-group has-search">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="input global id, email or short name"
-              id="searchbox"
-            />
-          </div>
-          <div class="profile-name">
-            <span class="display-name-container">
-              <span id="display-name-text" style="margin-right:2px">Display Name</span>
-              (<span id="shortname-text">short name</span>
-              <span class="clipboard copy-icon" title="Copy short name" data-clipboard-target="#shortname-text">
-                <i class="fa fa-clipboard"></i>
-              </span>)
-            </span>
-            <p>
-              <span id="email-text">email address</span>
-              <span class="clipboard copy-icon" title="Copy email address" data-clipboard-target="#email-text">
-                <i class="fa fa-clipboard"></i>
-              </span>
-            </p>
-          </div>
-          <div class="profile-description">
-            <p>Phone: +91-123-456-7890</p>
-            <p>Fax: +91-123-456-7890</p>
-            <p>City: XYZ City, ABC</p>
-          </div>
-          <div class="row">
-            <div
-              class="col-xs-4 clipboard"
-              title="click copy to clipboard"
-              data-clipboard-target="#globalid"
-            >
-              <div class="profile-overview">
-                <p>Global ID</p>
-                <h4 id="globalid"></h4>
+      </div>
+      
+      <!-- Content -->
+      <div style="padding: 0.5rem 1rem 1rem 1rem;">
+        <!-- Search Box -->
+        <div class="mb-1">
+          <input
+            type="text"
+            placeholder="Enter global ID, email, or short name"
+            id="searchbox"
+          />
+        </div>
+        
+        <!-- User Info -->
+        <div id="user-info" class="space-y-4">
+          <!-- Name Section -->
+          <div class="text-center">
+            <!-- Display Name and Short Name -->
+            <div class="name-card copy-btn" title="Click to copy short name" data-target="shortname-text">
+              <div class="copy-indicator">Click to copy</div>
+              <div class="flex items-center justify-center gap-1">
+                <span id="display-name-text" class="font-semibold text-lg text-gray-800">Display Name</span>
+                <span class="text-gray-600 font-medium text-md">(</span>
+                <span id="shortname-text" class="text-gray-600 font-medium text-md">short name</span>
+                <span class="text-gray-600 font-medium text-md">)</span>
               </div>
             </div>
-            <div
-              class="col-xs-4 clipboard"
-              title="click copy to clipboard"
-              data-clipboard-target="#costcenter"
-            >
-              <div class="profile-overview">
-                <p>Cost Center</p>
-                <h4 id="costcenter"></h4>
-              </div>
+            
+            <!-- Email -->
+            <div class="info-card copy-btn" title="Click to copy email address" data-target="email-text">
+              <div class="copy-indicator">Click to copy</div>
+              <div id="email-text" class="text-sm font-medium text-gray-800">email address</div>
             </div>
-            <div class="col-xs-4">
-              <div class="profile-overview">
-                <p>Company</p>
-                <h4 id="company"></h4>
-              </div>
+          </div>
+          
+          <!-- Contact Info -->
+          <div id="contact-info" class="bg-gray-50 rounded-lg p-3">
+            <div class="text-sm text-gray-600 space-y-1">
+              <p>Phone: +91-123-456-7890</p>
+              <p>Fax: +91-123-456-7890</p>
+              <p>City: XYZ City, ABC</p>
+            </div>
+          </div>
+          
+          <!-- Stats Grid -->
+          <div class="flex gap-3">
+            <!-- Global ID -->
+            <div class="info-card copy-btn flex-1 flex flex-col items-center justify-center" title="Click to copy Global ID" data-target="globalid">
+              <div class="copy-indicator">Click to copy</div>
+              <p class="text-xs text-gray-500 mb-1 font-medium">Global ID</p>
+              <h4 id="globalid" class="text-sm font-bold text-gray-800"></h4>
+            </div>
+            
+            <!-- Cost Center -->
+            <div class="info-card copy-btn flex-1 flex flex-col items-center justify-center" title="Click to copy Cost Center" data-target="costcenter">
+              <div class="copy-indicator">Click to copy</div>
+              <p class="text-xs text-gray-500 mb-1 font-medium">Cost Center</p>
+              <h4 id="costcenter" class="text-sm font-bold text-gray-800"></h4>
+            </div>
+            
+            <!-- Company -->
+            <div class="info-card copy-btn flex-1 flex flex-col items-center justify-center" title="Click to copy Company" data-target="company">
+              <div class="copy-indicator">Click to copy</div>
+              <p class="text-xs text-gray-500 mb-1 font-medium">Company</p>
+              <h4 id="company" class="text-sm font-bold text-gray-800"></h4>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <script src="../js/clipboard.min.js"></script>
+    
     <script src="faker.min.js"></script>
     <script src="popup.js"></script>
   </body>
