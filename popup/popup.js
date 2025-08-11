@@ -4,6 +4,11 @@ const displayNameText = document.getElementById("display-name-text");
 const shortnameText = document.getElementById("shortname-text");
 const emailText = document.getElementById("email-text");
 const contactInfo = document.getElementById("contact-info");
+const nationalName = document.getElementById("national-name");
+const position = document.getElementById("position");
+const phone = document.getElementById("phone");
+const fax = document.getElementById("fax");
+const cityCountry = document.getElementById("city-country");
 const globalid = document.getElementById("globalid");
 const costcenter = document.getElementById("costcenter");
 const company = document.getElementById("company");
@@ -85,10 +90,14 @@ function performSearch(input) {
       const fakeUser = {
         firstname: faker.name.firstName(),
         lastname: faker.name.lastName(),
+        firstnameNational: "华林",
+        lastnameNational: "朱",
+        position: "OTO Consultant",
         shortname: faker.name.suffix(),
         logonname: faker.internet.email(),
         communications: [
-          { type: 'phone', value: faker.phone.phoneNumber() }
+          { type: 'phone', value: faker.phone.phoneNumber() },
+          { type: 'fax', value: faker.phone.phoneNumber() }
         ],
         city: faker.address.city(),
         country: faker.address.country(),
@@ -111,13 +120,44 @@ function setUserData(user) {
   shortnameText.textContent = user.shortname;
   emailText.textContent = user.logonname;
   
-  // Update contact information
-  let contactHTML = '';
-  user.communications.forEach(comm => {
-    contactHTML += `<p>${comm.type}: ${comm.value}</p>`;
-  });
-  contactHTML += `<p>City: ${user.city}, ${user.country}</p>`;
-  contactInfo.innerHTML = `<div class="text-sm text-gray-600 space-y-1">${contactHTML}</div>`;
+  // Update contact information with individual fields
+  // National name
+  if (user.firstnameNational && user.lastnameNational) {
+    nationalName.textContent = `${user.lastnameNational}, ${user.firstnameNational}`;
+  } else {
+    nationalName.textContent = `${user.firstname} ${user.lastname}`;
+  }
+  
+  // Position
+  if (user.position) {
+    position.textContent = user.position;
+  } else {
+    position.textContent = "Not specified";
+  }
+  
+  // Phone and Fax
+  let phoneNumber = "Not specified";
+  let faxNumber = "Not specified";
+  
+  if (user.communications && user.communications.length > 0) {
+    user.communications.forEach(comm => {
+      if (comm.type === 'phone') {
+        phoneNumber = comm.value;
+      } else if (comm.type === 'fax') {
+        faxNumber = comm.value;
+      }
+    });
+  }
+  
+  phone.textContent = phoneNumber;
+  fax.textContent = faxNumber;
+  
+  // City and Country
+  if (user.city && user.country) {
+    cityCountry.textContent = `${user.city}, ${user.country}`;
+  } else {
+    cityCountry.textContent = "Not specified";
+  }
   
   // Update stats
   globalid.textContent = user.globalIdNumber;
