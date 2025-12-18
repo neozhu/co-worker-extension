@@ -2,389 +2,250 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My co-worker</title>
+    <title>My Co-worker</title>
     <style>
-      /* Reset and base styles */
+      :root {
+        --primary: #3b82f6;
+        --text-main: #1f2937;
+        --text-sub: #6b7280;
+        --bg-gray: #f1f5f9;
+        --card-bg: #ffffff;
+        --border-color: #f1f5f9;
+      }
+
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         font-size: 14px;
       }
-      
+
       body {
         width: 350px;
-        overflow: hidden;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        background-color: #f9fafb;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #374151;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: var(--bg-gray);
+        color: var(--text-main);
+        overflow-x: hidden;
       }
-      
-      /* Layout utilities */
-      .max-w-sm { max-width: 24rem; }
-      .mx-auto { margin-left: auto; margin-right: auto; }
-      .bg-white { background-color: #ffffff; }
-      .bg-gray-50 { background-color: #f9fafb; }
-      .bg-blue-50 { background-color: #eff6ff; }
-      .bg-green-50 { background-color: #f0fdf4; }
-      .bg-purple-50 { background-color: #faf5ff; }
-      .rounded-lg { border-radius: 0.5rem; }
-      .rounded-md { border-radius: 0.375rem; }
-      .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
-      .overflow-hidden { overflow: hidden; }
-      
-      /* Spacing */
-      .p-2 { padding: 0.5rem; }
-      .p-3 { padding: 0.75rem; }
-      .p-4 { padding: 1rem; }
-      .mb-1 { margin-bottom: 0.25rem; }
-      .mb-3 { margin-bottom: 0.75rem; }
-      .mb-4 { margin-bottom: 1rem; }
-      .ml-1 { margin-left: 0.25rem; }
-      .mx-1 { margin-left: 0.25rem; margin-right: 0.25rem; }
-      .space-y-1 > * + * { margin-top: 0.25rem; }
-      .space-y-4 > * + * { margin-top: 1rem; }
-      .gap-1 { gap: 0.25rem; }
-      .gap-3 { gap: 0.75rem; }
-      
-      /* Sizing */
-      .w-full { width: 100%; }
-      .flex-1 { flex: 1 1 0%; }
-      .header-image { 
-        height: 140px; 
-        object-fit: cover; 
-        width: 100%;
-        position: relative;
-      }
-      
-      /* Header image container with skew effect */
+
+      /* Header Image Section */
       .header-container {
         position: relative;
+        height: 130px;
         overflow: hidden;
-        height: 140px;
       }
-      
-      .header-container::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 15px;
-        background: #ffffff;
-        transform: skewY(1.5deg);
-        transform-origin: bottom left;
-        z-index: 1;
-      }
-      
-      /* Flexbox */
-      .flex { display: flex; }
-      .items-center { align-items: center; }
-      .justify-center { justify-content: center; }
-      
-      /* Grid */
-      .grid { display: grid; }
-      .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      
-      /* Text */
-      .text-center { text-align: center; }
-      .text-xs { 
-        font-size: 0.75rem; 
-        line-height: 1rem; 
-        font-weight: 500;
-        letter-spacing: 0.025em;
-      }
-      .text-sm { 
-        font-size: 0.875rem; 
-        line-height: 1.25rem; 
-        font-weight: 400;
-      }
-      .text-lg { 
-        font-size: 1.125rem; 
-        line-height: 1.75rem; 
-        font-weight: 600;
-        letter-spacing: -0.025em;
-      }
-      .text-md {
-        font-size: 1rem;
-        line-height: 1.5rem;
-        font-weight: 500;
-      }
-      .font-medium { font-weight: 500; }
-      .font-semibold { font-weight: 700; }
-      .font-bold { font-weight: 700; }
-      .block { display: block; }
-      
-      /* Colors */
-      .text-gray-500 { color: #6b7280; }
-      .text-gray-600 { color: #4b5563; }
-      .text-gray-700 { color: #374151; }
-      .text-gray-800 { color: #1f2937; }
-      
-      /* Form elements */
-      input[type="text"] {
+
+      .header-image {
         width: 100%;
-        padding: 0.5rem 0.75rem;
-        border: 1px solid #d1d5db;
-        border-radius: 0.375rem;
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-        font-weight: 400;
-        background-color: #ffffff;
-        transition: all 0.2s ease;
-        font-family: inherit;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        height: 100%;
+        object-fit: cover;
       }
-      
-      input[type="text"]:focus {
-        outline: none;
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-      }
-      
-      input[type="text"]::placeholder {
-        color: #9ca3af;
-        font-weight: 400;
-      }
-      
-      /* Search loading state */
-      .search-loading {
+
+      .content-wrapper {
+        padding: 0 12px 16px;
+        margin-top: -24px;
         position: relative;
-        pointer-events: none;
-        opacity: 0.7;
-      }
-      
-      .search-loading::after {
-        content: '';
-        position: absolute;
-        right: 8px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 16px;
-        height: 16px;
-        border: 2px solid #e5e7eb;
-        border-top: 2px solid #3b82f6;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-      
-      @keyframes spin {
-        0% { transform: translateY(-50%) rotate(0deg); }
-        100% { transform: translateY(-50%) rotate(360deg); }
-      }
-      
-      /* Button styles */
-      button {
-        background: none;
-        border: none;
-        font-size: inherit;
-        font-family: inherit;
-        font-weight: 500;
-      }
-      
-      .cursor-pointer { cursor: pointer; }
-      
-      /* Copy button styles */
-      .copy-btn {
-        cursor: pointer;
-        transition: all 0.2s ease;
-        border-radius: 6px;
-        position: relative;
-      }
-      
-      .copy-btn:hover {
-        background-color: rgba(59, 130, 246, 0.05);
-        transform: translateY(-1px);
-      }
-      
-      /* Override hover background for name-card */
-      .name-card.copy-btn:hover {
-        background-color: transparent;
-      }
-      
-      .copy-success {
-        background-color: rgba(16, 185, 129, 0.1) !important;
-      }
-      
-      /* Copy success indicator */
-      .copy-success-indicator {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        font-size: 14px;
-        color: #10b981;
-        background: rgba(255, 255, 255, 0.95);
-        padding: 2px 6px;
-        border-radius: 50%;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
         z-index: 10;
       }
-      
-      /* Info card styles */
-      .info-card {
-        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 12px;
-        position: relative;
-        cursor: pointer;
-        transition: all 0.2s ease;
+
+      /* Search Style */
+      .search-box {
+        margin-bottom: 12px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 10px 14px;
+        border: none;
+        border-radius: 10px;
+        background: var(--card-bg);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        font-size: 13px;
+      }
+
+      input[type="text"]:focus {
+        outline: 1px solid var(--primary);
+      }
+
+      /* Profile Card */
+      .main-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        margin-bottom: 12px;
         text-align: center;
       }
-      
-      .info-card:hover {
-        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-        border-color: #cbd5e1;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+      .name-section {
+        margin-bottom: 12px;
       }
-      
-      .info-card .copy-indicator {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        font-size: 10px;
-        color: #94a3b8;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 2px 6px;
-        border-radius: 3px;
-        opacity: 0;
-        transition: opacity 0.2s ease;
-        pointer-events: none;
-      }
-      
-      .info-card:hover .copy-indicator {
-        opacity: 1;
-      }
-      
-      /* Flex column utilities */
-      .flex-col { flex-direction: column; }
-      
-      /* Name card - special style without border/background */
-      .name-card {
-        position: relative;
+
+      .name-row {
         cursor: pointer;
-        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      #display-name-text {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+
+      #shortname-text {
+        color: var(--text-sub);
+        font-size: 14px;
+      }
+
+      /* National Name Styling */
+      #national-name {
+        display: block;
+        font-size: 13px;
+        color: var(--text-sub);
+        margin-top: 2px;
+        font-style: italic;
+      }
+
+      .email-link {
+        font-size: 12px;
+        color: var(--primary);
+        background: #eff6ff;
+        padding: 4px 10px;
+        border-radius: 20px;
+        display: inline-block;
+        margin-top: 8px;
+        cursor: pointer;
+      }
+
+      /* Info List */
+      .info-list {
+        border-top: 1px solid var(--border-color);
+        margin-top: 14px;
+        padding-top: 12px;
+      }
+
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        padding: 4px 0;
+      }
+
+      .label { color: var(--text-sub); }
+      .value { font-weight: 500; }
+
+      /* Stats Grid */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .stat-item {
+        background: var(--card-bg);
+        padding: 10px 4px;
+        border-radius: 10px;
         text-align: center;
-        padding: 12px;
-        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.1s;
       }
-      
-      .name-card:hover {
-        transform: translateY(-1px);
-      }
-      
-      .name-card .copy-indicator {
-        position: absolute;
-        top: 8px;
-        right: 8px;
+
+      .stat-item:active { transform: scale(0.95); }
+
+      .stat-label {
         font-size: 10px;
-        color: #94a3b8;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 2px 6px;
-        border-radius: 3px;
-        opacity: 0;
-        transition: opacity 0.2s ease;
-        pointer-events: none;
+        color: var(--text-sub);
+        text-transform: uppercase;
+        margin-bottom: 2px;
       }
-      
-      .name-card:hover .copy-indicator {
-        opacity: 1;
+
+      .stat-val {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+
+      /* Toast Tooltip */
+      #toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(31, 41, 55, 0.9);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        display: none;
       }
     </style>
   </head>
-  <body class="bg-gray-50">
-    <div class="max-w-sm mx-auto bg-white shadow-lg overflow-hidden">
-      <!-- Header Image -->
-      <div class="header-container">
-        <img
-          src="../images/title3.jpg"
-          class="header-image"
-          alt="background img"
-        />
+  <body>
+    <!-- 原始图片保留 -->
+    <div class="header-container">
+      <img src="../images/title3.jpg" class="header-image" alt="background" />
+    </div>
+    
+    <div class="content-wrapper">
+      <div class="search-box">
+        <input type="text" placeholder="Search colleague..." id="searchbox" />
       </div>
       
-      <!-- Content -->
-      <div style="padding: 0.5rem 1rem 1rem 1rem;">
-        <!-- Search Box -->
-        <div class="mb-1">
-          <input
-            type="text"
-            placeholder="Enter global ID, email, or short name"
-            id="searchbox"
-          />
+      <div id="user-info">
+        <div class="main-card">
+          <div class="name-section">
+            <!-- 姓名与简名 -->
+            <div class="name-row copy-btn" data-target="shortname-text">
+              <span id="display-name-text">Display Name</span>
+              <span id="shortname-text">(shortname)</span>
+            </div>
+            <!-- National Name 保留 -->
+            <span id="national-name">National Name Displayed Here</span>
+            
+            <div class="email-link copy-btn" id="email-text" data-target="email-text">
+              email.address@company.com
+            </div>
+          </div>
+          
+          <div class="info-list">
+            <div class="info-row">
+              <span class="label">Position</span>
+              <span class="value" id="position">-</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Mobile</span>
+              <span class="value" id="fax">-</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Location</span>
+              <span class="value" id="city-country">-</span>
+            </div>
+            <div style="display:none"><span id="phone"></span></div>
+          </div>
         </div>
         
-        <!-- User Info -->
-        <div id="user-info" class="space-y-4">
-          <!-- Name Section -->
-          <div class="text-center">
-            <!-- Display Name and Short Name -->
-            <div class="name-card copy-btn" title="Click to copy short name" data-target="shortname-text">
-              <div class="copy-indicator">Click to copy</div>
-              <div class="flex items-center justify-center gap-1">
-                <span id="display-name-text" class="font-semibold text-lg text-gray-800">Display Name</span>
-                <span class="text-gray-600 font-medium text-md">(</span>
-                <span id="shortname-text" class="text-gray-600 font-medium text-md">short name</span>
-                <span class="text-gray-600 font-medium text-md">)</span>
-              </div>
-            </div>
-            
-            <!-- Email -->
-            <div class="info-card copy-btn" title="Click to copy email address" data-target="email-text">
-              <div class="copy-indicator">Click to copy</div>
-              <div id="email-text" class="text-sm font-medium text-gray-800">email address</div>
-            </div>
+        <div class="stats-grid">
+          <div class="stat-item copy-btn" data-target="globalid">
+            <p class="stat-label">Global ID</p>
+            <p id="globalid" class="stat-val">-</p>
           </div>
-          
-          <!-- Contact Info -->
-          <div id="contact-info" class="bg-gray-50 rounded-lg p-3">
-            <div class="text-sm text-gray-600 space-y-1">
-              <p>National name: <span id="national-name">James Uecker</span></p>
-              <p>Position: <span id="position">Project Manager</span></p>
-              <p>Phone: <span id="phone">+91-123-456-7890</span></p>
-              <p>Mobile: <span id="fax">+91-123-456-7890</span></p>
-              <p>City: <span id="city-country">XYZ City, ABC</span></p>
-            </div>
+          <div class="stat-item copy-btn" data-target="costcenter">
+            <p class="stat-label">Cost Center</p>
+            <p id="costcenter" class="stat-val">-</p>
           </div>
-          
-          <!-- Stats Grid -->
-          <div class="flex gap-3">
-            <!-- Global ID -->
-            <div class="info-card copy-btn flex-1 flex flex-col items-center justify-center" title="Click to copy Global ID" data-target="globalid">
-              <div class="copy-indicator">Click to copy</div>
-              <p class="text-xs text-gray-500 mb-1 font-medium">Global ID</p>
-              <h4 id="globalid" class="text-sm font-bold text-gray-800"></h4>
-            </div>
-            
-            <!-- Cost Center -->
-            <div class="info-card copy-btn flex-1 flex flex-col items-center justify-center" title="Click to copy Cost Center" data-target="costcenter">
-              <div class="copy-indicator">Click to copy</div>
-              <p class="text-xs text-gray-500 mb-1 font-medium">Cost Center</p>
-              <h4 id="costcenter" class="text-sm font-bold text-gray-800"></h4>
-            </div>
-            
-            <!-- Company -->
-            <div class="info-card copy-btn flex-1 flex flex-col items-center justify-center" title="Click to copy Company" data-target="company">
-              <div class="copy-indicator">Click to copy</div>
-              <p class="text-xs text-gray-500 mb-1 font-medium">Company</p>
-              <h4 id="company" class="text-sm font-bold text-gray-800"></h4>
-            </div>
+          <div class="stat-item copy-btn" data-target="company">
+            <p class="stat-label">Company</p>
+            <p id="company" class="stat-val">-</p>
           </div>
         </div>
       </div>
     </div>
-    
+
+    <div id="toast">Copied!</div>
+
     <script src="faker.min.js"></script>
     <script src="popup.js"></script>
   </body>

@@ -1,6 +1,6 @@
 {
     "name": "My co-worker",
-    "version": "0.0.3.4",
+    "version": "0.0.3.5",
     "manifest_version": 3,
     "description": "search co-worker information with short name, global id and email address",
     "icons": {
