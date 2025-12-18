@@ -90,14 +90,14 @@ function performSearch(input) {
       const fakeUser = {
         firstname: faker.name.firstName(),
         lastname: faker.name.lastName(),
-        firstnameNational: "华林",
-        lastnameNational: "朱",
+        firstnameNational: "白",
+        lastnameNational: "李",
         position: "OTO Consultant",
         shortname: faker.name.suffix(),
         logonname: faker.internet.email(),
         communications: [
-          { type: 'phone', value: faker.phone.phoneNumber() },
-          { type: 'fax', value: faker.phone.phoneNumber() }
+          { type: 'Phone', value: faker.phone.phoneNumber() },
+          { type: 'Mobile', value: faker.phone.phoneNumber() }
         ],
         city: faker.address.city(),
         country: faker.address.country(),
@@ -135,22 +135,27 @@ function setUserData(user) {
     position.textContent = "Not specified";
   }
   
-  // Phone and Fax
-  let phoneNumber = "Not specified";
-  let faxNumber = "Not specified";
-  
-  if (user.communications && user.communications.length > 0) {
+  // Phone (landline) and Fax (show mobile instead)
+  let phoneNumber = null;
+  let mobileNumber = null;
+
+  if (Array.isArray(user.communications)) {
     user.communications.forEach(comm => {
-      if (comm.type === 'phone') {
+      const type = String(comm.type || '').toLowerCase();
+      if (type === 'phone' && !phoneNumber) {
         phoneNumber = comm.value;
-      } else if (comm.type === 'fax') {
-        faxNumber = comm.value;
       }
+      if (type === 'mobile' && !mobileNumber) {
+        mobileNumber = comm.value;
+      }
+      // Intentionally ignore real 'fax' per requirement
     });
   }
-  
-  phone.textContent = phoneNumber;
-  fax.textContent = faxNumber;
+
+  // Prefer landline for Phone; fall back to mobile
+  phone.textContent = phoneNumber || mobileNumber || "Not specified";
+  // Show Mobile number in Fax field; fall back to phone
+  fax.textContent = mobileNumber || phoneNumber || "Not specified";
   
   // City and Country
   if (user.city && user.country) {
