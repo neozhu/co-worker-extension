@@ -3,11 +3,11 @@ const searchbox = document.getElementById("searchbox");
 const displayNameText = document.getElementById("display-name-text");
 const shortnameText = document.getElementById("shortname-text");
 const emailText = document.getElementById("email-text");
-const contactInfo = document.getElementById("contact-info");
 const nationalName = document.getElementById("national-name");
 const position = document.getElementById("position");
 const phone = document.getElementById("phone");
-const fax = document.getElementById("fax");
+const mobile = document.getElementById("mobile");
+const office = document.getElementById("office");
 const cityCountry = document.getElementById("city-country");
 const globalid = document.getElementById("globalid");
 const costcenter = document.getElementById("costcenter");
@@ -135,7 +135,7 @@ function setUserData(user) {
     position.textContent = "Not specified";
   }
   
-  // Phone (landline) and Fax (show mobile instead)
+  // Phone (landline) and Mobile
   let phoneNumber = null;
   let mobileNumber = null;
 
@@ -148,14 +148,17 @@ function setUserData(user) {
       if (type === 'mobile' && !mobileNumber) {
         mobileNumber = comm.value;
       }
-      // Intentionally ignore real 'fax' per requirement
+      // Ignore other communication types
     });
   }
 
   // Prefer landline for Phone; fall back to mobile
   phone.textContent = phoneNumber || mobileNumber || "Not specified";
-  // Show Mobile number in Fax field; fall back to phone
-  fax.textContent = mobileNumber || phoneNumber || "Not specified";
+  mobile.textContent = mobileNumber || phoneNumber || "Not specified";
+
+  // Office location composed of building / floor / room
+  const officeParts = [user.building, user.floor, user.room].filter(Boolean);
+  office.textContent = officeParts.length ? officeParts.join(" / ") : "Not specified";
   
   // City and Country
   if (user.city && user.country) {
@@ -240,7 +243,7 @@ function showCopyFeedback(button) {
   }
   
   // Create success indicator
-  const successIndicator = document.createElement('div');
+  const successIndicator = document.createElement('span');
   successIndicator.className = 'copy-success-indicator';
   successIndicator.textContent = '✓';
   

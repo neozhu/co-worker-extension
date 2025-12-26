@@ -56,12 +56,12 @@
 
       input[type="text"] {
         width: 100%;
-        padding: 10px 14px;
+        padding: 12px 16px;
         border: none;
         border-radius: 10px;
         background: var(--card-bg);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-        font-size: 13px;
+        font-size: 14px;
       }
 
       input[type="text"]:focus {
@@ -115,9 +115,15 @@
         background: #eff6ff;
         padding: 4px 10px;
         border-radius: 20px;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
         margin-top: 8px;
         cursor: pointer;
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       /* Info List */
@@ -132,6 +138,15 @@
         justify-content: space-between;
         font-size: 13px;
         padding: 4px 0;
+      }
+
+      /* Slightly smaller text inside info-list only.
+         NOTE: We must override the global `* { font-size: 14px; }` rule,
+         so apply it to all descendants as well.
+      */
+      .info-list,
+      .info-list * {
+        font-size: 12px;
       }
 
       .label { color: var(--text-sub); }
@@ -181,6 +196,63 @@
         font-size: 12px;
         display: none;
       }
+
+      /* Hover “snap” effect for elements that support copy */
+      .copy-btn {
+        cursor: pointer;
+        /* default transition is used when mouse LEAVES (gentle fall) */
+        transition: transform 260ms cubic-bezier(0.22, 0.61, 0.36, 1);
+        will-change: transform;
+        transform-origin: center;
+      }
+
+      .copy-btn:hover {
+        /* hover-enter feels snappy; hover-leave uses the slower default above */
+        transition-duration: 140ms;
+        transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+        transform: translateY(-3px) scale(1.02);
+      }
+
+      .copy-btn:active {
+        transition-duration: 120ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+        transform: translateY(0) scale(0.98);
+      }
+
+      /* Keep the stats cards “press” feeling stronger */
+      .stat-item.copy-btn:active {
+        transform: translateY(0) scale(0.95);
+      }
+
+      /* Stronger, smoother feedback for “card-like” copy elements */
+      .stat-item.copy-btn,
+      .email-link.copy-btn {
+        transition:
+          transform 260ms cubic-bezier(0.22, 0.61, 0.36, 1),
+          box-shadow 260ms cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+
+      .stat-item.copy-btn:hover,
+      .email-link.copy-btn:hover {
+        transition-duration: 140ms;
+        transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .copy-btn {
+          transition: none;
+        }
+      }
+
+      .copy-success-indicator {
+        display: inline-block;
+        font-size: 12px;
+        line-height: 1;
+        opacity: 0;
+        transition: opacity 180ms ease;
+        flex: 0 0 auto;
+      }
     </style>
   </head>
   <body>
@@ -216,14 +288,21 @@
               <span class="value" id="position">-</span>
             </div>
             <div class="info-row">
+              <span class="label">Phone</span>
+              <span class="value" id="phone">-</span>
+            </div>
+            <div class="info-row">
               <span class="label">Mobile</span>
-              <span class="value" id="fax">-</span>
+              <span class="value" id="mobile">-</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Office</span>
+              <span class="value" id="office">-</span>
             </div>
             <div class="info-row">
               <span class="label">Location</span>
               <span class="value" id="city-country">-</span>
             </div>
-            <div style="display:none"><span id="phone"></span></div>
           </div>
         </div>
         
